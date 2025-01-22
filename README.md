@@ -113,6 +113,6 @@ Now, we aim to compare the performance of the Logistic Regression model to our K
 
 | Model | Train Time | Train Accuracy | Test Accuracy |
 | ----- | ---------- | -------------  | -----------   |
-|     |    |.     |.     |
+|     |    |     |     |
 
 r
