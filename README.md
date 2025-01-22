@@ -91,7 +91,7 @@ With your data prepared, split it into a train and test set.
 
 Before we build our first model, we want to establish a baseline.  What is the baseline performance that our classifier should aim to beat?
 
-- A random classifier model was used as the baseline. This model took about 0.0044 seconds to train. Recall will be the initial evaluation metric with a confusion matrix being used as well. The recall score of the random classifier model is about 0.5031. There were a significant number of true positives and a low number of true negatives. However, the number of false negatives and false positives were about the same and higher than the true positives. This is the baseline performance that we should aim to beat.
+- A random classifier model was used as the baseline. This model took about 0.0044 seconds to train. Recall will be the initial evaluation metric with a confusion matrix being used as well. The recall score of the random classifier model is about 0.5031. There were a significant number of true negatives and a low number of true positives. However, the number of false negatives and false positives were about the same and higher than the true positives. This is the baseline performance that we should aim to beat.
 ![Confusion matrix of the Baseline model](https://github.com/user-attachments/assets/72fab45e-61b1-439c-b73c-6ff9dce0b54d)
 
 ### Problem 8: A Simple Model
@@ -104,7 +104,7 @@ Use Logistic Regression to build a basic model on your data.
 
 What is the accuracy of your model?
 
-- The recall score of the logistic model was 0.5. From the confusion matrix, there is a high number of true positives with the rest going to the false positives. There were no false negatives or true negatives.
+- The recall score of the logistic regression model was 0.5. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
 ![Confusion matrix of the Logistic Regression model](https://github.com/user-attachments/assets/72fdbcc8-09f6-458b-9008-4c326b833f32)
 
 ### Problem 10: Model Comparisons
@@ -115,4 +115,43 @@ Now, we aim to compare the performance of the Logistic Regression model to our K
 | ----- | ---------- | -------------  | -----------   |
 |     |    |     |     |
 
-r
+- A knn model was built within 0.0087 seconds. The recall score of the knn model was 0.53. From the confusion matrix, there is a high number of true negatives and a low number of true positives. The second highest is the false positives and the second lowest is the false negatives.
+![Confusion matrix of the KNN model](https://github.com/user-attachments/assets/365ffc79-b3a3-4af9-a2e1-3f28e08817ac)
+
+- A decision tree model was built within 0.0060 seconds. The recall score of the knn model was 0.5. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
+![Confusion matrix of the Decision Tree model](https://github.com/user-attachments/assets/20c32a96-72f6-4140-82d7-f49268ca5b63)
+
+- A svm model was built within 1.7710 seconds. The recall score of the knn model was 0.5. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
+
+Below is the filled in table from ealier. However, it should be noted that accuracy is only listed here because the table asks for accuracy. Accurracy is not the best performance metric for this data considering the data is so unbalanced. Therefore, despite this table, the performance of the models will be evaluated based on the previously mentioned recall scores and confusion matrices.
+
+![Time and Accuracy](https://github.com/user-attachments/assets/bf341cdf-3176-42c6-9b79-16643282973b)
+
+### Problem 11: Improving the Model
+
+Now that we have some basic models on the board, we want to try to improve these.  Below, we list a few things to explore in this pursuit.
+
+- More feature engineering and exploration.  For example, should we keep the gender feature?  Why or why not?
+- Hyperparameter tuning and grid search.  All of our models have additional hyperparameters to tune and explore.  For example the number of neighbors in KNN or the maximum depth of a Decision Tree.  
+- Adjust your performance metric
+
+- Furthure feature engineering would definately be helpful. In the full dataset that is observed there is no gender column already. However, this column shouldn't be added as gender is not a determining factor for whether a person has the means to subsribe to a deposit or not. However, other features could could be used as only the job and marital features were used for these models so far.
+- Hyperparameter tuning and grid search can be done on ach of the four modeling techniques, logistic regression, knn, decision trees, and svm. The performance metrics are also adjusted as grid search find the "best" parameters for the each model. For the logistic regression model, the best parameter out of all those tried was "1".
+- Performing GridSearchCV on a KNN model is computationally expensive. Therefore, an n value of 10 eas tried. The knn with n=10 model was built within 0.0117 seconds. The recall score of the knn model was 0.5. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
+![Confusion matrix of the KNN model with N=10](https://github.com/user-attachments/assets/f0aea927-035a-4926-9c62-533c8205c3a4)
+
+- The maximun depth of the decision tree model is 8. This means that ther maximun number of levels/splits for this modelis 8 levels/splits. It should be noted that although a higher maximun depth captures more complex patterns in the data, it can lead to overfitting. Therefore, a decision tree with a max_depth of 4 was made. The decision tree with max_depth=4 model was built within 0.0087 seconds. The recall score of the knn model was 0.5. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
+![Confusion matrix of the Decision Tree model with max_depth=4](https://github.com/user-attachments/assets/b31f1d07-0515-4e4c-9043-f19e6c994041)
+
+- For the SVM model, GridSearch CV was not performed doing so on SVM is too computationally expensive. Instead, a polynomial kernel was added to the SVM model. The svm model with a polynomial kernel was built within 2.6832 seconds. The recall score of the knn model was 0.5. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
+![Confusion matrix of the SVM model with a polynomial kernel](https://github.com/user-attachments/assets/f1da179e-1e8e-4c0d-bfe6-fe6e13df08a1)
+
+### Findings
+
+As a reminder, the goal of creating these models is to help the Portuguese banking institution predict if a customer will subscribe to the term deposit or not. This will help the comany save time when it comes to their marketing campains as these campaigns involves indiviually calling customers multiple times and talking to them for various and long durations. Being able to know what features and characteristics customers are likely to high will help them target the campains to individuals who will likely subscribe. After some data analysis and predictive modeling, it seems that a decision tree model is the best for redicting if a customer will subscribe or not. The various factors that went into this result include the times, recall scores, and confusion matrices of the models. It should be noted that the main two models that performed well were the logistic regression and decision tree models. The knn and svm models were very computationally expensive. Although the knn model had a slightly higher recall score, the difference is not significant and the confusion matrix for this model shows many more false positives compared to other models. The knn model with n=10 showed a better confusion matrix than the knn model with n=1; however, this confusion matrix was no better than the other models. In addition to being computationally expensive, the svm model did not show better results when a polynomial kernel was added. Between a logistic regression model and a decision tree model, the decision tree model was less computationally expensive both with and without a specified maximun depth. Furthermore, decision trees work best for this dataset as they are better for imbalanced data and are not biased toward the majority class.
+
+### Next Steps
+
+Futher data collection, data cleaning, and predictive modeling is best. Other features that may affect a subscription decision should be considered like the number of children someone may have or the individuals income. Income is esecially important as the job feature seems to be effective during prediction. However, there are some jobs that may seem like they usually yield a high income when they actually don't. For example, someone who is self-employed or and entrprenuer could make a wide range of money that even various throughout the year significantly. Further data cleaning could be done to better encode the nonnumerical data. It should be noted that for the purpose of knowing exactly what label was encode to which feature, label encoding was done individually. Using the LabelEncoder() function would be faster in the future. Furthur feature selction could also be done. For the models created, features specific to the individuals who were called was used, like job and marital status. However, other features like the unemployment rate and month may be useful in predicting the best time to contact customers. Furthure paramteer tuning would also be useful. Consideirng the duration of the call was important yet was not useful for prediction, the Portuguse banking institution could also try other marketing campagns like in-person ones that help lesson duration and contact while increasing the reach. Personally talking to someone can hel when tryingg to convince them of something in comparison to talking on the phone.
+
+The link to the coding for this project is here
