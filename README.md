@@ -92,7 +92,7 @@ With your data prepared, split it into a train and test set.
 
 Before we build our first model, we want to establish a baseline.  What is the baseline performance that our classifier should aim to beat?
 
-- A random classifier model was used as the baseline. This model took about 0.0022 seconds to train. Recall will be the initial evaluation metric with a confusion matrix being used as well. The recall score of the random classifier model is about 0.5030. There were a significant number of true negatives and a low number of true positives. However, the number of false negatives and false positives were about the same and higher than the true positives. This is the baseline performance that we should aim to beat.
+- A random classifier model was used as the baseline. This model took about 0.0022 seconds to train. Recall will be the initial evaluation metric with a confusion matrix being used as well. The recall score of the random classifier model is about 0.7977. There were a significant number of true negatives and a low number of true positives. However, the number of false negatives and false positives were about the same and higher than the true positives. This is the baseline performance that we should aim to beat.
 ![Confusion matrix of the Baseline model](https://github.com/user-attachments/assets/72fab45e-61b1-439c-b73c-6ff9dce0b54d)
 
 ### Problem 8: A Simple Model
@@ -105,7 +105,7 @@ Use Logistic Regression to build a basic model on your data.
 
 What is the accuracy of your model?
 
-- The recall score of the logistic regression model was 0.5. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
+- The recall score of the logistic regression model was 0.8821. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
 ![Confusion matrix of the Logistic Regression model](https://github.com/user-attachments/assets/72fdbcc8-09f6-458b-9008-4c326b833f32)
 
 ### Problem 10: Model Comparisons
@@ -116,18 +116,17 @@ Now, we aim to compare the performance of the Logistic Regression model to our K
 | ----- | ---------- | -------------  | -----------   |
 |     |    |     |     |
 
-- A knn model was built within 0.0078 seconds. The recall score of the knn model was 0.53. From the confusion matrix, there is a high number of true negatives and a low number of true positives. The second highest is the false positives and the second lowest is the false negatives.
+- A knn model was built within 0.0078 seconds. The recall score of the knn model was 0.7927. From the confusion matrix, there is a high number of true negatives and a low number of true positives. The second highest is the false positives and the second lowest is the false negatives.
 ![Confusion matrix of the KNN model](https://github.com/user-attachments/assets/365ffc79-b3a3-4af9-a2e1-3f28e08817ac)
 
-- A decision tree model was built within 0.0064 seconds. The recall score of the decision tree model was 0.5. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
+- A decision tree model was built within 0.0064 seconds. The recall score of the decision tree model was 0.8821. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
 ![Confusion matrix of the Decision Tree model](https://github.com/user-attachments/assets/20c32a96-72f6-4140-82d7-f49268ca5b63)
 
-- A svm model was built within 1.9802 seconds. The recall score of the svm model was 0.5. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
+- A svm model was built within 1.9802 seconds. The recall score of the svm model was 0.8821. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
 ![Confusion matrix of the SVM model](https://github.com/user-attachments/assets/3df3b3f0-3f0c-4973-85ad-316abad9366c)
 
 - Below is the filled-in table from earlier. However, it should be noted that accuracy is only listed here because the table asks for accuracy. Accuracy is not the best performance metric for this data considering the data is so unbalanced. Therefore, despite this table, the performance of the models will be evaluated based on the previously mentioned recall scores and confusion matrices.
-
-![Time and Accuracy](https://github.com/user-attachments/assets/bf341cdf-3176-42c6-9b79-16643282973b)
+![Time and Accuracy](https://github.com/user-attachments/assets/ed1e7342-67fd-4e96-9d82-3980cd284555)
 
 ### Problem 11: Improving the Model
 
@@ -137,15 +136,15 @@ Now that we have some basic models on the board, we want to try to improve these
 - Hyperparameter tuning and grid search.  All of our models have additional hyperparameters to tune and explore.  For example the number of neighbors in KNN or the maximum depth of a Decision Tree.  
 - Adjust your performance metric
 
-- Furthure feature engineering would definately be helpful. In the full dataset that is observed there is no gender column already. However, this column shouldn't be added as gender is not a determining factor for whether a person has the means to subsribe to a deposit or not. However, other features could could be used as only the job and marital features were used for these models so far.
-- Hyperparameter tuning and grid search can be done on ach of the four modeling techniques, logistic regression, knn, decision trees, and svm. The performance metrics are also adjusted as grid search find the "best" parameters for the each model. For the logistic regression model, the best parameter out of all those tried was "1".
-- Performing GridSearchCV on a KNN model is computationally expensive. Therefore, an n value of 10 eas tried. The knn with n=10 model was built within 0.0117 seconds. The recall score of the knn model was 0.5. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
+- Further feature engineering would definitely be helpful. In the full dataset that is observed, there is no 'gender' column already. However, this column shouldn't be added as gender is not a determining factor for whether a person has the means to subscribe to a deposit or not. However, other features could be used as only the 'job' and 'marital' features have been used for these models so far.
+- Hyperparameter tuning and grid search can be done on each of the four modeling techniques, logistic regression, knn, decision trees, and svm. The performance metrics are also adjusted as grid search finds the "best" parameters for each model. For the logistic regression model, the best parameter out of all those tried was "1".
+- Performing GridSearchCV on a KNN model is computationally expensive. Therefore, the hyperparameter 'n' was tuned. Setting the n value to 10 was tried. The knn with n=10 model was built within 0.0070 seconds. The recall score of the knn model with n=10 was 0.5. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
 ![Confusion matrix of the KNN model with N=10](https://github.com/user-attachments/assets/f0aea927-035a-4926-9c62-533c8205c3a4)
 
-- The maximun depth of the decision tree model is 8. This means that ther maximun number of levels/splits for this modelis 8 levels/splits. It should be noted that although a higher maximun depth captures more complex patterns in the data, it can lead to overfitting. Therefore, a decision tree with a max_depth of 4 was made. The decision tree with max_depth=4 model was built within 0.0087 seconds. The recall score of the knn model was 0.5. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
+- The maximum depth of the decision tree model is 8. This means that the maximum number of levels/splits for this model is 8 levels/splits. It should be noted that although a higher maximum depth captures more complex patterns in the data, it can lead to overfitting. Therefore, a decision tree with a max_depth of 4 was made. The decision tree with max_depth=4 model was built within 0.0051 seconds. The recall score of the decision tree model with max_depth=4 model was 0.5. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
 ![Confusion matrix of the Decision Tree model with max_depth=4](https://github.com/user-attachments/assets/b31f1d07-0515-4e4c-9043-f19e6c994041)
 
-- For the SVM model, GridSearch CV was not performed doing so on SVM is too computationally expensive. Instead, a polynomial kernel was added to the SVM model. The svm model with a polynomial kernel was built within 2.6832 seconds. The recall score of the knn model was 0.5. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
+- For the SVM model, GridSearch CV was not performed as doing so on SVM is too computationally expensive. Instead, a polynomial kernel was added to the SVM model. The svm model with a polynomial kernel was built within 2.5941 seconds. The recall score of the svm model with a polynomial kernel was 0.5. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
 ![Confusion matrix of the SVM model with a polynomial kernel](https://github.com/user-attachments/assets/f1da179e-1e8e-4c0d-bfe6-fe6e13df08a1)
 
 ### Findings
