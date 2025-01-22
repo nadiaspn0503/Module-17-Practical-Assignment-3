@@ -11,13 +11,13 @@ Our dataset comes from the UCI Machine Learning repository [link](https://archiv
 
 To gain a better understanding of the data, please read the information provided in the UCI link above, and examine the **Materials and Methods** section of the paper.  How many marketing campaigns does this data represent?
 
-- The data from a Portugese banking institute gives the results of direct marketing campains done by the company. These campains were done through hpone calls. The phone calls involve telephone and celular calls. In total, there were 41,188 calls. Of these calls, 15,044 were telephone calls and 26,144 were cellular calls. The highest number of times contact had to be made during the campaign is 56 times.
+- The data from a Portuguese banking institute gives the results of direct marketing campaigns done by the company. These campaigns were done through phone calls. The phone calls involve telephone and cellular calls. In total, there were 41,188 calls. Of these calls, 15,044 were telephone calls and 26,144 were cellular calls. The highest number of times contact had to be made during the campaign was 56 times.
 
 ### Problem 2: Read in the Data
 
 Use pandas to read in the dataset `bank-additional-full.csv` and assign to a meaningful variable name.
 
-- It should be noted that the UCI Machine Learning repository provided multiple versions of this datasets which includes samples of the original dataset. For the purpose of this project, only the original full dataset was read in so that the data could persoanally and easily be slit for training and testing.
+- It should be noted that the UCI Machine Learning repository provided multiple versions of this dataset which includes samples of the original dataset. For the purpose of this project, only the original full dataset was read in so that the data could personally and easily be split for training and testing.
 
   ### Problem 3: Understanding the Features
 
@@ -56,49 +56,50 @@ Output variable (desired target):
 21 - y - has the client subscribed a term deposit? (binary: 'yes','no')
 ```
 
-- There are no missing values from this dataset. However, it should be noted that this datset is significantly unbalanced with about 88.73% of people choosing not subscribe and only 11.27% of people choosing to subscribe. This dataset is filled with floats, integers, and objects. Some features may need to be converted later during feature selection before modeling. This dataset was filled with a few duplicates which were removed
-- During this time, some data analysis was reformed to identify some features that are likely to affact the target outcome to help with modleing and predicting. Through a histogram visualizing the job column of the dataset, it can be seen that there are various jobs that have a higher rate of choosing to subscribe to the term deposit. These jobs include admin, technician, and more.
+- There are no missing values from this dataset. However, it should be noted that this dataset is significantly unbalanced with about 88.73% of people choosing not to subscribe to the term deposit and only 11.27% of people choosing to subscribe. This dataset is filled with floats, integers, and objects. Some features may need to be converted/encoded later during feature selection before modeling. This dataset was filled with a few duplicates which were removed.
+
+- During this time, some data analysis was reformed to identify some features that are likely to affect the target outcome to help with modeling and predicting. Through a histogram visualizing the job column of the dataset, it can be seen that there are various jobs that have a higher rate of choosing to subscribe to the term deposit. These jobs include admin, technician, and more.
 ![Number of accepted subscriptions by job](https://github.com/user-attachments/assets/9d9a8f88-8d17-4850-9c60-0f48cfdaec4d)
 
-- During data analysis, the jobs admin, technician, student, and retired were chosen for comparison as despite the lower number of subscritions, fewer retired people and students were contacted, making the percentage who subscribed within those specific groups high. The comparision was made between married individuals with a technician, admin, student, or retired job to all others. The results showed that of the married individuals with a technician, admin, student, or retired job, 14.47% said yes to subscribing while 10.83% of all others said yes. This shows that these jobs and a married status are characteristics that are likely to lead to saying yes to a subscription. It should be noted that the high "no" rate has been observed but will not be extremely important considering how significantly unbalanced the data is.
+- During data analysis, the jobs admin, technician, student, and retired were chosen for comparison. Despite the fewer subscriptions, fewer retired people and students were contacted, making the percentage who subscribed within those specific groups high. The comparison was made between married individuals with a technician, admin, student, or retired job to all others. The results showed that of the married individuals with a technician, admin, student, or retired job, 14.47% said "yes" to subscribing while 10.83% of all others said "yes". This shows that these jobs and a married status are characteristics that are likely to lead a person to say "yes" to a subscription. It should be noted that the high "no" rate has been observed but will not be extremely important considering how significantly unbalanced the data is.
 ![Subscription Acceptance for Married People With a Technician, Admin, Student, or Retired  Job to All Others](https://github.com/user-attachments/assets/1106147f-2f40-445d-9f5b-078bc73ef8db)
 
-- ANother comparision performed was between those with a university degree and no personal loan and all others. These features were chosen as those with a university degree are likely to make more money than those without one. The lack of personal loans means that these individuals likely do not have any major debt, like a student loan, that would prevent them from saying yes to a subscription. The results of the anaylsis show that 13.98% of those with a university dgeree and no personaly loan said "yes" to a subscription while 10.40% of all others said "yes".
+- Another comparison performed was between those with a university degree and no personal loan and all others. These features were chosen as those with a university degree are likely to make more money than those without one. The lack of personal loans means that these individuals likely do not have any major debt, like a student loan, that would prevent them from saying "yes" to a subscription. The results of the analysis show that 13.98% of those with a university degree and no personal loan said "yes" to a subscription while 10.40% of all others said "yes".
 ![Subscription Acceptance for People With a University Degree and No Personal Loan to All Others](https://github.com/user-attachments/assets/bd4fd47e-b809-4baa-8cfb-7dec9e97a348)
 
 ### Problem 4: Understanding the Task
 
 After examining the description and data, your goal now is to clearly state the *Business Objective* of the task.  State the objective below.
 
-- A Portuguese banking institution is attempting get more clients to subscribe to a term deposit. The institution is reaching out the various clients through phone calls. Unfortunately, individual phone calls must be made to various clients with eac client likly requiring multiple calls. This is time consuming and unrewarding, especially if the client refusing to subscribe to a term deposit. Therefore, the Portuguese banking institution must figure out which charateristics describe a client that will likely say 'yes' to subscribing to a term deposit. Using classification models to determmine the accurate model with the best features, the insttution will be able to direct their marketing campain to clients that are more likely to subscribe which will bring in more business to the insituation.
+- A Portuguese banking institution is attempting to get more clients to subscribe to a term deposit. The institution is reaching out to various clients through phone calls. Unfortunately, individual phone calls must be made to various clients with each client likely requiring multiple calls. This is time-consuming and unrewarding, especially if the client refuses to subscribe to a term deposit in the end. Therefore, the Portuguese banking institution must figure out which characteristics describe a client that will likely say "yes" to subscribing to a term deposit. Using classification models to determine the accurate model with the best features, the institution will be able to direct its marketing campaigns to clients that are more likely to subscribe which will bring in more business to the institution. 
 
 ### Problem 5: Engineering Features
 
 Now that you understand your business objective, we will build a basic model to get started.  Before we can do this, we must work to encode the data.  Using just the bank information features, prepare the features and target column for modeling with appropriate encoding and transformations.
 
-- To prepare the features for modeling, encoding had to be done as many of the seemingly important features were nonnumerical. For starters, the "y" column which displayed the target variable of rather someone said "yes" or "no" to the subscribtion was encoded. "No" is represted by "0" and "yes" is represented by "1". Further visualization were done to identify features that would be encoded versus those that would be kept. The categorical features that were visualized includes the job, marital, education, default, housing, loan, month, and day_of_week columns. These visualizations show how many more people above the mean choose to subscribe out of all the people within each category. For example, although more people with an admin job said "yes", these visualizations show that out of the total number of students asked, most of them said "yes" compared to other jobs. These plots can also help with feature selection as it contributed to choosing retired and student for data analysis.
+- To prepare the features for modeling, encoding had to be done as many of the seemingly important features were nonnumerical. For starters, the "y" column which displayed the target variable of whether someone said "yes" or "no" to the subscription was encoded. "No" is represented by "0" and "yes" is represented by "1". Further visualization was done to identify features that would be encoded versus those that would be deleted. The categorical features that were visualized include the 'job', 'marital', 'education', 'default', 'housing', 'loan', 'month', and 'day_of_week' columns. These visualizations show how many more people above the mean choose to subscribe out of all the people within each category. For example, although more people with an admin job said "yes", these visualizations show that out of the total number of students asked, most of them said "yes" compared to other jobs. These plots can also help with feature selection as they contributed to choosing retired people and students for the previous data analysis.
 ![The acceptance of categorical features](https://github.com/user-attachments/assets/2fbfb67e-54b1-4f9d-b417-12487dc80982)
 
-- The nonnumerical features that went through label encoding include the job, marital, education, housing, loan, month, and day_of_week features. Although not all of these features are used for modeling, they can be used for further/future modleing. The features that were removed include the default, contact, poutcome, and duration features. This is because the default column was significatly imbalaned with only 3 people with a default loan; therefore, this column likely does not have an affect on modeling and predicting. Contact was removed as it does not seem to be very important beyond data recording. The poutcome column was deleted as most of the values were "nonexistent". Despite being deemed important, the duration coulmn was deleted as the duration of the call cannot be determined prior to the call; therefore, this column holds no value for predictive modeling. After encoding, the index was reset.
+- The non-numerical features that went through label encoding include the 'job', 'marital', 'education', 'housing', 'loan', 'month', and 'day_of_week' features. Although not all of these features are used for modeling, they can be used for further/future modeling. The features that were removed include the 'default', 'contact', 'poutcome', and 'duration' features. This is because the 'default' column was significantly imbalanced with only 3 people with a defaulted loan; therefore, this column likely does not have an effect on modeling and predicting. 'Contact' was removed as it does not seem to be very important beyond data recording. The 'poutcome' column was deleted as most of the values were "nonexistent". Despite being deemed important, the 'duration' column was deleted as the duration of the call cannot be determined prior to the call; therefore, this column holds no value for predictive modeling. After encoding, the index was reset.
 
   ### Problem 6: Train/Test Split
 
 With your data prepared, split it into a train and test set.
 
-- The data was split with the test size being 20%, leaving 80% of the data for training. The features that will be used for basic modeling are the job and marital features. The "y" colunn listing if the person choose to subscribe or not is the target.
+- The data was split with the test size being 20%, leaving 80% of the data for training. The features that will be used for basic modeling are the 'job' and 'marital' features. The "y" column listing if the person chose to subscribe or not is the target.
 
 ### Problem 7: A Baseline Model
 
 Before we build our first model, we want to establish a baseline.  What is the baseline performance that our classifier should aim to beat?
 
-- A random classifier model was used as the baseline. This model took about 0.0044 seconds to train. Recall will be the initial evaluation metric with a confusion matrix being used as well. The recall score of the random classifier model is about 0.5031. There were a significant number of true negatives and a low number of true positives. However, the number of false negatives and false positives were about the same and higher than the true positives. This is the baseline performance that we should aim to beat.
+- A random classifier model was used as the baseline. This model took about 0.0022 seconds to train. Recall will be the initial evaluation metric with a confusion matrix being used as well. The recall score of the random classifier model is about 0.5030. There were a significant number of true negatives and a low number of true positives. However, the number of false negatives and false positives were about the same and higher than the true positives. This is the baseline performance that we should aim to beat.
 ![Confusion matrix of the Baseline model](https://github.com/user-attachments/assets/72fab45e-61b1-439c-b73c-6ff9dce0b54d)
 
 ### Problem 8: A Simple Model
 
 Use Logistic Regression to build a basic model on your data.  
 
-- A logistic regression model was built within 0.0199 seconds.
+- A logistic regression model was built within 0.0220 seconds.
 
 ### Problem 9: Score the Model
 
@@ -115,15 +116,16 @@ Now, we aim to compare the performance of the Logistic Regression model to our K
 | ----- | ---------- | -------------  | -----------   |
 |     |    |     |     |
 
-- A knn model was built within 0.0087 seconds. The recall score of the knn model was 0.53. From the confusion matrix, there is a high number of true negatives and a low number of true positives. The second highest is the false positives and the second lowest is the false negatives.
+- A knn model was built within 0.0078 seconds. The recall score of the knn model was 0.53. From the confusion matrix, there is a high number of true negatives and a low number of true positives. The second highest is the false positives and the second lowest is the false negatives.
 ![Confusion matrix of the KNN model](https://github.com/user-attachments/assets/365ffc79-b3a3-4af9-a2e1-3f28e08817ac)
 
-- A decision tree model was built within 0.0060 seconds. The recall score of the knn model was 0.5. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
+- A decision tree model was built within 0.0064 seconds. The recall score of the decision tree model was 0.5. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
 ![Confusion matrix of the Decision Tree model](https://github.com/user-attachments/assets/20c32a96-72f6-4140-82d7-f49268ca5b63)
 
-- A svm model was built within 1.7710 seconds. The recall score of the knn model was 0.5. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
+- A svm model was built within 1.9802 seconds. The recall score of the svm model was 0.5. From the confusion matrix, there is a high number of true negatives with the rest going to the false negatives. There were no false positives or true positives.
+![Confusion matrix of the SVM model](https://github.com/user-attachments/assets/3df3b3f0-3f0c-4973-85ad-316abad9366c)
 
-Below is the filled in table from ealier. However, it should be noted that accuracy is only listed here because the table asks for accuracy. Accurracy is not the best performance metric for this data considering the data is so unbalanced. Therefore, despite this table, the performance of the models will be evaluated based on the previously mentioned recall scores and confusion matrices.
+- Below is the filled-in table from earlier. However, it should be noted that accuracy is only listed here because the table asks for accuracy. Accuracy is not the best performance metric for this data considering the data is so unbalanced. Therefore, despite this table, the performance of the models will be evaluated based on the previously mentioned recall scores and confusion matrices.
 
 ![Time and Accuracy](https://github.com/user-attachments/assets/bf341cdf-3176-42c6-9b79-16643282973b)
 
